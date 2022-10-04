@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/539240ae-5af0-4e31-999b-64688d4e696f/AppServices/subscriptions/539240ae-5af0-4e31-999b-64688d4e696f/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.Web/sites/sajiwebsite",
+    "appService.deploySubpath": "bin\\Publish"
+}

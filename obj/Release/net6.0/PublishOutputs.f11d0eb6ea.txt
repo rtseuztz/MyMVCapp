@@ -1,0 +1,7 @@
+C:\Users\sajim\code\csharp\MyMVCapp\bin\Publish\MyMVCapp.exe
+C:\Users\sajim\code\csharp\MyMVCapp\bin\Publish\appsettings.Development.json
+C:\Users\sajim\code\csharp\MyMVCapp\bin\Publish\appsettings.json
+C:\Users\sajim\code\csharp\MyMVCapp\bin\Publish\MyMVCapp.dll
+C:\Users\sajim\code\csharp\MyMVCapp\bin\Publish\MyMVCapp.deps.json
+C:\Users\sajim\code\csharp\MyMVCapp\bin\Publish\MyMVCapp.runtimeconfig.json
+C:\Users\sajim\code\csharp\MyMVCapp\bin\Publish\MyMVCapp.pdb
