@@ -1,8 +1,10 @@
 using System.Net.Http.Headers;
 
-namespace MyMVCapp.Models;
-public class Util {
-    public static string getLatestVersion() {
+namespace Util;
+public class Util
+{
+    public static string getLatestVersion()
+    {
         var client = new HttpClient();
         client.BaseAddress = new Uri("https://ddragon.leagueoflegends.com");
         client.DefaultRequestHeaders.Accept.Clear();

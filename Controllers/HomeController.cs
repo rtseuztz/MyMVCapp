@@ -22,6 +22,12 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult Champions()
+    {
+        var champions = new QuickType.Champion();
+        var championList = champions.GetChampions();
+        return View();
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
