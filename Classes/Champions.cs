@@ -4,7 +4,39 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using sqltest;
 using Newtonsoft.Json.Linq;
-namespace QuickType
+
+
+namespace Champions
+{
+    public class Champion
+    {
+        public string name { get; private set; }
+        public Champion(string name)
+        {
+            this.name = name;
+        }
+        public static List<JSON.Champion> ReloadChampions()
+        {
+            var champions = new List<JSON.Champion>();
+            string version = Util.Util.getLatestVersion();
+            using (var webClient = new System.Net.WebClient())
+            {
+                var json = webClient.DownloadString("https://ddragon.leagueoflegends.com/cdn/" + version + "/data/en_US/champion.json");
+                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<JSON.Champion>(json);
+                var ChampionObj = data.Data;
+                foreach (var champion in ChampionObj)
+                {
+                    Console.WriteLine(champion.Value.Key);
+                    SQL.executeQuery("INSERT INTO Champions (id, name) VALUES (@id, @name)", SQL.getParams(new dynamic[] { "id", champion.Value.Key, "name", champion.Value.Name }));
+                }
+            }
+
+            return champions;
+        }
+    }
+}
+
+namespace JSON
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +46,7 @@ namespace QuickType
     using Newtonsoft.Json.Converters;
 
 
-    public partial class Champion
+    public class Champion
     {
         [JsonProperty("type")]
         public TypeEnum Type { get; set; }
@@ -27,26 +59,7 @@ namespace QuickType
 
         [JsonProperty("data")]
         public Dictionary<string, Datum> Data { get; set; }
-        public List<Champion> GetChampions()
-        {
-            var champions = new List<Champion>();
-            string version = Util.Util.getLatestVersion();
-            using (var webClient = new System.Net.WebClient())
-            {
-                var json = webClient.DownloadString("https://ddragon.leagueoflegends.com/cdn/" + version + "/data/en_US/champion.json");
-                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Champion>(json);
-                Console.WriteLine(data.Data["Aatrox"].Name);
-                var ChampionObj = data.Data;
-                var sql = new SqlClient();
-                foreach (var champion in ChampionObj)
-                {
-                    Console.WriteLine(champion.Value.Key);
-                    sql.executeQuery("INSERT INTO Champions (id, name) VALUES ('" + champion.Value.Id + "', '" + champion.Value.Name + "')");
-                }
-            }
 
-            return champions;
-        }
     }
 
     public partial class Datum
@@ -131,12 +144,12 @@ namespace QuickType
 
     public partial class Champions
     {
-        public static Champions FromJson(string json) => JsonConvert.DeserializeObject<Champions>(json, QuickType.Converter.Settings);
+        public static Champions FromJson(string json) => JsonConvert.DeserializeObject<Champions>(json, JSON.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Champions self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this Champions self) => JsonConvert.SerializeObject(self, JSON.Converter.Settings);
     }
 
     internal static class Converter

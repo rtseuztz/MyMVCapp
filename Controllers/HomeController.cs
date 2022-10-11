@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyMVCapp.Models;
-
+using Champions;
 namespace MyMVCapp.Controllers;
 
 public class HomeController : Controller
@@ -13,8 +13,9 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(string? x)
     {
+        Console.WriteLine(x);
         return View();
     }
 
@@ -24,8 +25,8 @@ public class HomeController : Controller
     }
     public IActionResult Champions()
     {
-        var champions = new QuickType.Champion();
-        var championList = champions.GetChampions();
+        // var champions = new Champion();
+        var championList = Champion.ReloadChampions();
         return View();
     }
 
