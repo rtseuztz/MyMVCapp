@@ -1,14 +1,19 @@
 using System;
 using Microsoft.Data.SqlClient;
 using System.Text;
-
+using System.Data;
+using System.Data.SqlClient;
 namespace sqltest
 {
 
     class SQL
     {
         public static string connectionString = Environment.GetEnvironmentVariable("AzureSqlConn") ?? "";
-        public static void executeQuery(string query, (string key, string value)[] parameters)
+        public static async Task<DataTable> executeQuery(string query)
+        {
+            return await executeQuery(query, getParams(new dynamic[] { }));
+        }
+        public static async Task<DataTable> executeQuery(string query, (string key, string value)[] parameters)
         {
             try
             {
@@ -21,13 +26,17 @@ namespace sqltest
                         {
                             command.Parameters.AddWithValue($"@{parameters[i].key}", parameters[i].value);
                         }
-                        command.ExecuteNonQuery();
+                        DataTable dataTable = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(dataTable);
+                        return dataTable;
                     }
                 }
             }
             catch (SqlException e)
             {
                 Console.WriteLine(e.ToString());
+                return new DataTable();
             }
         }
         public static (string key, string value)[] getParams(dynamic[] p)

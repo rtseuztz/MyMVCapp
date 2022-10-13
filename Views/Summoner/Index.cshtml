@@ -2,9 +2,11 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
+<script type="text/javascript"></script>
 <div class="text-center">
     <h1 class="display-4">Summoners</h1>
-    <p>Puuid is @Model?.getPuuid</p>
+    <p>Puuid is @Model?.puuid</p>
+    <p>Your total winrate over x games is @Model?.wr</p>
+    @Model?.games
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

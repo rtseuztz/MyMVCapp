@@ -2,3 +2,12 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+const nameInput = $("#summoner_input")
+nameInput.keyup(function (event) {
+    if (event.keyCode === 13) {
+        const name = nameInput.val();
+        if (name) {
+            window.location.href = "/summoner/" + name;
+        }
+    }
+});
