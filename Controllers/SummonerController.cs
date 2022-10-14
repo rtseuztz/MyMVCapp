@@ -39,7 +39,7 @@ public class SummonerController : Controller
         //retrieve the user's games
         List<Games.Games> games = await Games.Games.getGames(summoner.Puuid);
         var wr = await summoner.winRate();
-        return View(new SummonerModel { puuid = summoner.Name, wr = wr, games = games });
+        return View(new SummonerModel(summoner, games));
     }
 
 }

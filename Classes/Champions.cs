@@ -15,7 +15,7 @@ namespace Champions
         {
             this.name = name;
         }
-        public static List<JSON.Champion> ReloadChampions()
+        public async static Task<List<JSON.Champion>> ReloadChampions()
         {
             var champions = new List<JSON.Champion>();
             string version = Util.Util.getLatestVersion();
@@ -27,7 +27,7 @@ namespace Champions
                 foreach (var champion in ChampionObj)
                 {
                     Console.WriteLine(champion.Value.Key);
-                    SQL.executeQuery("INSERT INTO Champions (id, name) VALUES (@id, @name)", SQL.getParams(new dynamic[] { "id", champion.Value.Key, "name", champion.Value.Name }));
+                    await SQL.executeQuery("INSERT INTO Champions (id, name) VALUES (@id, @name)", SQL.getParams(new dynamic[] { "id", champion.Value.Key, "name", champion.Value.Name }));
                 }
             }
 

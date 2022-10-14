@@ -2,7 +2,7 @@ using sqltest;
 using System.Data;
 namespace Summoners
 {
-    class Summoner
+    public class Summoner
     {
         public string Name { get; private set; }
         public string Puuid { get; private set; }
@@ -70,12 +70,12 @@ namespace Summoners
                 return 0;
             }
         }
-        public void updateUploadSummoner()
+        public async void updateUploadSummoner()
         {
             try
             {
                 DateTime twoDaysAgo = DateTime.Now.AddDays(-2);
-                sqltest.SQL.executeQuery(@"
+                await sqltest.SQL.executeQuery(@"
                 IF NOT EXISTS (
                     SELECT 1 FROM Summoners WHERE puuid = @puuid
                 )
@@ -84,9 +84,9 @@ namespace Summoners
                 END
                 ELSE
                 BEGIN
-                    UPDATE Summoners SET name = @name, accountId = @accountId, profileIconId = @profileIconId, revisionDate = @revisionDate, summonerLevel = @summonerLevel, lmod = getDate(), processed = 1 WHERE id = @id
+                    UPDATE Summoners SET name = @name, accountId = @accountId, profileIconId = @profileIconId, revisionDate = @revisionDate, summonerLevel = @summonerLevel, lmod = getDate(), processed = 1 WHERE puuid = @puuid
                 END",
-                sqltest.SQL.getParams(new dynamic[] { "id", Id, "name", Name, "puuid", Puuid, "accountId", AccountId, "profileIconId", ProfileIconId, "revisionDate", RevisionDate, "summonerLevel", SummonerLevel, "lmod", twoDaysAgo }));
+                sqltest.SQL.getParams(new dynamic[] { "id", Id, "name", Name, "puuid", Puuid.Trim(), "accountId", AccountId, "profileIconId", ProfileIconId, "revisionDate", RevisionDate, "summonerLevel", SummonerLevel, "lmod", twoDaysAgo }));
             }
             catch (Exception e)
             {

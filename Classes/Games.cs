@@ -33,11 +33,11 @@ public class Games
     }
 
     private static string apikey = Environment.GetEnvironmentVariable("RIOT_API_KEY");
-    public void uploadGame()
+    public async void uploadGame()
     {
         try
         {
-            sqltest.SQL.executeQuery(@"
+            await sqltest.SQL.executeQuery(@"
                 INSERT INTO Games
                 (gameCreation, gameDuration, gameEndTimestamp, gameId, gameMode, gameName, gameStartTimestamp, gameType, gameVersion, mapId) 
                 VALUES
@@ -46,8 +46,8 @@ public class Games
 
             foreach (Participant participant in participants)
             {
-                participant.checkUploadSummoner();
-                participant.uploadParticipant(gameId);
+                await participant.checkUploadSummoner();
+                await participant.uploadParticipant(gameId);
             }
 
         }
@@ -253,7 +253,7 @@ public class Participant
         this.win = win;
         this.gid = gid;
     }
-    public async void checkUploadSummoner()
+    public async Task<Boolean> checkUploadSummoner()
     {
         try
         {
@@ -275,8 +275,9 @@ public class Participant
         {
             Console.WriteLine(e);
         }
+        return true;
     }
-    public async void uploadParticipant(long gameid)
+    public async Task<Boolean> uploadParticipant(long gameid)
     {
         try
         {
@@ -289,7 +290,7 @@ public class Participant
             "gameID", gameid ,
             "championName", championName,
             "win", win,
-            "puuid", puuid,
+            "puuid", puuid.Trim(),
             "assists", assists,
             "baronKills", baronKills,
             "bountyLevel", bountyLevel,
@@ -325,6 +326,7 @@ public class Participant
         {
             Console.WriteLine(e);
         }
+        return true;
     }
     public static async Task<List<Participant>> getParticipants(long gameID)
     {
@@ -383,7 +385,7 @@ public class Participant
                 Convert.ToInt32(row["goldSpent"]),
                 Convert.ToString(row["individualPosition"]),
                 Convert.ToInt32(row["inhibitorKills"]),
-                Convert.ToString(row["puuid"]),
+                Convert.ToString(row["puuid"]).Trim(),
                 Convert.ToBoolean(row["win"]),
                 Convert.ToInt64(row["gid"])
                 );
