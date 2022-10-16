@@ -8,45 +8,49 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MyMVCapp
 build_property.RootNamespace = MyMVCapp
-build_property.ProjectDir = C:\Users\sajim\code\csharp\MyMVCapp\
+build_property.ProjectDir = c:\Users\sajim\code\csharp\MyMVCapp\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\sajim\code\csharp\MyMVCapp
+build_property.MSBuildProjectDirectory = c:\Users\sajim\code\csharp\MyMVCapp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/Home/Champions.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/Home/Champions.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGFtcGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/Home/Index.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/Home/Privacy.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/Home/Leaderboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMZWFkZXJib2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/Shared/Error.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/Summoner/Index.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/Summoner/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VtbW9uZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/_ViewImports.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/_ViewStart.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sajim/code/csharp/MyMVCapp/Views/Shared/_Layout.cshtml]
+[c:/Users/sajim/code/csharp/MyMVCapp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ukqeww81kn

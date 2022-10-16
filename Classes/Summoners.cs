@@ -80,7 +80,7 @@ namespace Summoners
                     SELECT 1 FROM Summoners WHERE puuid = @puuid
                 )
                 BEGIN
-                    INSERT INTO Summoners (id, name, puuid, accountId, profileIconId, revisionDate, summonerLevel, lmod) VALUES (@id, @name, @puuid, @accountId, @profileIconId, @revisionDate, @summonerLevel, @lmod)
+                    INSERT INTO Summoners (id, name, puuid, accountId, profileIconId, revisionDate, summonerLevel, processed, lmod) VALUES (@id, @name, @puuid, @accountId, @profileIconId, @revisionDate, @summonerLevel, 1, @lmod)
                 END
                 ELSE
                 BEGIN

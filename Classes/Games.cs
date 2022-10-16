@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-
+using sqltest;
 namespace Games;
 using System.Data;
 public class Games
@@ -37,12 +37,12 @@ public class Games
     {
         try
         {
-            await sqltest.SQL.executeQuery(@"
+            await SQL.executeQuery(@"
                 INSERT INTO Games
                 (gameCreation, gameDuration, gameEndTimestamp, gameId, gameMode, gameName, gameStartTimestamp, gameType, gameVersion, mapId) 
                 VALUES
                 (@gameCreation, @gameDuration, @gameEndTimestamp, @gameId, @gameMode, @gameName, @gameStartTimestamp, @gameType, @gameVersion, @mapId)",
-                sqltest.SQL.getParams(new dynamic[] { "gameCreation", gameCreation, "gameDuration", gameDuration, "gameEndTimestamp", gameEndTimestamp, "gameId", gameId, "gameMode", gameMode, "gameName", gameName, "gameStartTimestamp", gameStartTimestamp, "gameType", gameType, "gameVersion", gameVersion, "mapId", mapId }));
+                SQL.getParams(new dynamic[] { "gameCreation", gameCreation, "gameDuration", gameDuration, "gameEndTimestamp", gameEndTimestamp, "gameId", gameId, "gameMode", gameMode, "gameName", gameName, "gameStartTimestamp", gameStartTimestamp, "gameType", gameType, "gameVersion", gameVersion, "mapId", mapId }));
 
             foreach (Participant participant in participants)
             {
@@ -60,9 +60,9 @@ public class Games
     // {
     //     //if not processed, then do an api call for games. This is for Summoners added through other searches.
     //     //Otherwise, if the lmod date is less than 24 hours ago, don't update the user's games
-    //     DataTable dt = await sqltest.SQL.executeQuery(@"
+    //     DataTable dt = await SQL.executeQuery(@"
     //         SELECT lmod FROM Summoners WHERE puuid = @puuid AND processed = 1",
-    //         sqltest.SQL.getParams(new dynamic[] { "puuid", puuid }));
+    //         SQL.getParams(new dynamic[] { "puuid", puuid }));
     //     if (dt.Rows.Count > 0 && (DateTime.Now - DateTime.Parse(dt.Rows[0][0].ToString())).TotalHours < 24)
     //     {
     //         return await getGamesFromDB(puuid);
@@ -91,7 +91,7 @@ public class Games
         try
         {
             List<string> gameIdsInDB = new List<string>();
-            DataTable gidDt = await sqltest.SQL.executeQuery(@"
+            DataTable gidDt = await SQL.executeQuery(@"
                 SELECT gameId FROM Games WHERE gameId IN (" + string.Join(",", gameIds) + ")");
             foreach (DataRow row in gidDt.Rows)
             {
@@ -104,11 +104,11 @@ public class Games
             games.AddRange(await getGamesFromAPI(gamesMissing));
             games.AddRange(await getGamesFromDB(gamesInDB));
 
-            // DataTable dt = await sqltest.SQL.executeQuery(@"
+            // DataTable dt = await SQL.executeQuery(@"
             //     SELECT * FROM Games WHERE gameid IN (
             //     SELECT gid FROM ChampionPlayedIn WHERE puuid = @puuid
             //     ) ORDER BY gameStartTimestamp DESC",
-            //     sqltest.SQL.getParams(new dynamic[] { "puuid", puuid }));
+            //     SQL.getParams(new dynamic[] { "puuid", puuid }));
             // foreach (DataRow row in dt.Rows)
             // {
             //     List<Participant> participants = await Participant.getParticipants(long.Parse(row["gameId"].ToString()));
@@ -138,7 +138,7 @@ public class Games
         List<Games> games = new List<Games>();
         try
         {
-            DataTable dt = await sqltest.SQL.executeQuery(@"
+            DataTable dt = await SQL.executeQuery(@"
                 SELECT * FROM Games WHERE gameid IN (" + string.Join(",", gameids) + ") ORDER BY gameStartTimestamp DESC");
             foreach (DataRow row in dt.Rows)
             {
@@ -257,7 +257,7 @@ public class Participant
     {
         try
         {
-            await sqltest.SQL.executeQuery(@"
+            await SQL.executeQuery(@"
             IF NOT EXISTS (
                 SELECT 1
                 FROM summoners
@@ -267,7 +267,7 @@ public class Participant
                 INSERT INTO summoners (puuid)
                 VALUES (@puuid)
             END",
-            sqltest.SQL.getParams(new dynamic[] {
+            SQL.getParams(new dynamic[] {
                 "puuid", puuid,
             }));
         }
@@ -281,12 +281,12 @@ public class Participant
     {
         try
         {
-            var x = await sqltest.SQL.executeQuery(@"
+            var x = await SQL.executeQuery(@"
             INSERT INTO ChampionPlayedIn
             (gid, cname, win, puuid, assists, baronKills, bountyLevel, champExperience, champLevel, championId, championTransform, consumablesPurchased, damageDealtToBuildings, damageDealtToObjectives, damageDealtToTurrets, damageSelfMitigated, deaths, detectorWardsPlaced, doubleKills, dragonKills, firstBloodAssist, firstBloodKill, firstTowerAssist, firstTowerKill, gameEndedInEarlySurrender, gameEndedInSurrender, goldEarned, goldSpent, individualPosition, inhibitorKills)
             VALUES
             (@gameId, @championName, @win, @puuid, @assists, @baronKills, @bountyLevel, @champExperience, @champLevel, @championId, @championTransform, @consumablesPurchased, @damageDealtToBuildings, @damageDealtToObjectives, @damageDealtToTurrets, @damageSelfMitigated, @deaths, @detectorWardsPlaced, @doubleKills, @dragonKills, @firstBloodAssist, @firstBloodKill, @firstTowerAssist, @firstTowerKill, @gameEndedInEarlySurrender, @gameEndedInSurrender, @goldEarned, @goldSpent, @individualPosition, @inhibitorKills)",
-            sqltest.SQL.getParams(new dynamic[] {
+            SQL.getParams(new dynamic[] {
             "gameID", gameid ,
             "championName", championName,
             "win", win,
@@ -333,10 +333,10 @@ public class Participant
         List<Participant> participants = new List<Participant>();
         try
         {
-            DataTable dt = await sqltest.SQL.executeQuery(@"
+            DataTable dt = await SQL.executeQuery(@"
             SELECT * FROM ChampionPlayedIn
             WHERE gid = @gameID",
-            sqltest.SQL.getParams(new dynamic[] { "gameID", gameID })
+            SQL.getParams(new dynamic[] { "gameID", gameID })
             );
             participants = Participant.listFromDT(dt);
         }
